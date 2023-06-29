@@ -1,13 +1,11 @@
 import data from "./data.json";
-import Comment from "./components/Comment";
+import Comments from "./components/Comments";
 import AddComment from "./components/AddComment";
 
 function App() {
   return (
     <div className="app">
-      {data.comments.map((comment) => (
-        <Comment key={comment.id} comment={comment} />
-      ))}
+      <Comments comments={data.comments}/>
       <AddComment data={data}/>
     </div>
   );
