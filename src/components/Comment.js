@@ -1,7 +1,25 @@
+import { useState } from "react";
 import Likes from "./Likes";
 import ReplyButton from "./ReplyButton";
 
 const Comment = ( {comment} ) => {
+
+  const [score, setScore] = useState(comment.score);
+  const [liked, setLiked] = useState(false);
+
+  const handleLike = () => {
+    if (!liked) {
+      setScore(score + 1);
+      setLiked(true);
+    }
+  };
+
+  const handleUnlike = () => {
+    if (liked) {
+      setScore(score - 1);
+      setLiked(false);
+    }
+  };
 
   const renderReplies = (replies) => {
     return (
@@ -14,7 +32,7 @@ const Comment = ( {comment} ) => {
       </ul>
     );
   };
-
+  
   
   return (
     <>
@@ -28,7 +46,7 @@ const Comment = ( {comment} ) => {
         {comment.content}
       </div>
       <div className="vote-and-reply-container">
-        <Likes voteNumber={comment.score}/>
+        <Likes voteNumber={score} onUpvote={handleLike} onDownvote={handleUnlike}/>
         <ReplyButton />
       </div>
     </div>
