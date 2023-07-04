@@ -1,11 +1,15 @@
 import { useState } from "react";
+import data from "../data.json"
 import Likes from "./Likes";
 import ReplyButton from "./ReplyButton";
+import ReplyForm from "./ReplyForm";
 
 const Comment = ( {comment} ) => {
 
   const [score, setScore] = useState(comment.score);
   const [liked, setLiked] = useState(false);
+  const [replies, setReplies] = useState(comment.replies || []);
+  const [showReplyForm, setShowReplyForm] = useState(false);
 
   const handleLike = () => {
     if (!liked) {
@@ -19,6 +23,26 @@ const Comment = ( {comment} ) => {
       setScore(score - 1);
       setLiked(false);
     }
+  };
+
+  const generateUniqueId = () => {
+    return Math.random() * 200;
+  };
+
+  const submitReply = (replyContent) => {
+    const newReply = {
+      id: generateUniqueId(),
+      content: replyContent,
+      user: data.currentUser,
+      createdAt: new Date().toDateString(),
+      score: 0
+    }
+
+    setReplies([...replies, newReply]);
+  };
+
+  const handleReplyButtonClick = () => {
+    setShowReplyForm(!showReplyForm);
   };
 
   const renderReplies = (replies) => {
@@ -47,12 +71,13 @@ const Comment = ( {comment} ) => {
       </div>
       <div className="vote-and-reply-container">
         <Likes voteNumber={score} onUpvote={handleLike} onDownvote={handleUnlike}/>
-        <ReplyButton />
+        <ReplyButton handleReplyButtonClick={handleReplyButtonClick} />
       </div>
     </div>
-    {comment.replies && comment.replies.length > 0 && (
+    {showReplyForm && <ReplyForm submitReply={submitReply}/>}
+    {replies && replies.length > 0 && (
       <div>
-        {renderReplies(comment.replies)}
+        {renderReplies(replies)}
       </div>
     )}
     </>
