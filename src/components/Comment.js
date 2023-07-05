@@ -3,6 +3,8 @@ import data from "../data.json"
 import Likes from "./Likes";
 import ReplyButton from "./ReplyButton";
 import ReplyForm from "./ReplyForm";
+import Edit from "./Edit";
+import Delete from "./Delete";
 
 const Comment = ( {comment} ) => {
 
@@ -57,23 +59,46 @@ const Comment = ( {comment} ) => {
     );
   };
   
-  
+  const currentUserName = data.currentUser.username;
+
   return (
     <>
-    <div className="single-comment">
-      <div className="user-info-container">
+    {comment.user.username === currentUserName ? (
+      <div className="single-comment">
+        <div className="user-info-container">
+          <img className="user-image" src={comment.user.image.png} alt="" />
+          <span className="username">{comment.user.username}</span>
+          <span className="you-text">you</span>
+          <span className="date-posted">{comment.createdAt}</span>
+        </div>
+        <div className="comment-text">
+          {comment.content}
+        </div>
+        <div className="vote-and-reply-container">
+          <Likes voteNumber={score} onUpvote={handleLike} onDownvote={handleUnlike}/>
+          <div className="edit-delete-container">
+            <Delete />
+            <Edit />
+          </div>
+        </div>
+      </div>
+    ) : (
+      <div className="single-comment">
+        <div className="user-info-container">
           <img className="user-image" src={comment.user.image.png} alt="" />
           <span className="username">{comment.user.username}</span>
           <span className="date-posted">{comment.createdAt}</span>
+        </div>
+        <div className="comment-text">
+          {comment.content}
+        </div>
+        <div className="vote-and-reply-container">
+          <Likes voteNumber={score} onUpvote={handleLike} onDownvote={handleUnlike}/>
+          <ReplyButton handleReplyButtonClick={handleReplyButtonClick} />
+        </div>
       </div>
-      <div className="comment-text">
-        {comment.content}
-      </div>
-      <div className="vote-and-reply-container">
-        <Likes voteNumber={score} onUpvote={handleLike} onDownvote={handleUnlike}/>
-        <ReplyButton handleReplyButtonClick={handleReplyButtonClick} />
-      </div>
-    </div>
+    )}
+
     {showReplyForm && <ReplyForm submitReply={submitReply}/>}
     {replies && replies.length > 0 && (
       <div>

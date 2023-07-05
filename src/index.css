@@ -33,7 +33,7 @@ body {
 .username{
   color: hsl(212, 24%, 26%);
   font-weight: 700;
-  margin-right: 1rem;
+  margin-right: 0.5rem;
 }
 
 .date-posted{
@@ -69,6 +69,9 @@ body {
   justify-content: space-between;
   align-items: center;
 }
+.reply-container{
+  cursor: pointer;
+}
 
 /* .upvote,
 .downvote,
@@ -80,6 +83,7 @@ body {
   background: hsl(228, 33%, 97%);
   padding: min(2.5vmin, 0.5rem) min(5vmin, 1rem);;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .vote-number,
@@ -141,3 +145,27 @@ body {
   border-radius: 5px;
   background: none;
 } 
+
+.edit-delete-container{
+  display: flex;
+}
+.deleter-icon-container,
+.edit-icon-container{
+  margin: 0 0.4rem;
+  cursor: pointer;
+}
+.edit-cta-text{
+  color: hsl(238, 40%, 52%);
+  margin: 0 0.4rem
+}
+.delete-cta-text{
+  color: hsl(358, 79%, 66%);
+  margin: 0 0.4rem
+}
+.you-text{
+  padding: 0.1rem 0.4rem;
+  margin: 0.5rem;
+  color: #fff;
+  background: hsl(238, 40%, 52%);
+  border-radius: 5px;
+}
