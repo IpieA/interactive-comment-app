@@ -6,7 +6,7 @@ import ReplyForm from "./ReplyForm";
 import Edit from "./Edit";
 import Delete from "./Delete";
 
-const Comment = ( {comment} ) => {
+const Comment = ( {comment, onDelete} ) => {
 
   const [score, setScore] = useState(comment.score);
   const [liked, setLiked] = useState(false);
@@ -77,8 +77,8 @@ const Comment = ( {comment} ) => {
         <div className="vote-and-reply-container">
           <Likes voteNumber={score} onUpvote={handleLike} onDownvote={handleUnlike}/>
           <div className="edit-delete-container">
-            <Delete />
-            <Edit />
+          <Delete onClick={() => onDelete(comment)} />
+          <Edit />
           </div>
         </div>
       </div>
