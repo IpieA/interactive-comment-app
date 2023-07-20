@@ -1,9 +1,9 @@
 import Comment from "./Comment"
 
-const Comments = ({ comments, onDelete }) => {
+const Comments = ({ comments, onDelete, onSave }) => {
   const renderComments = (comments) => {
     return comments.map((comment) => (
-      <Comment key={comment.id} comment={comment} onDelete={onDelete}/>
+      <Comment key={comment.id} comment={comment} onDelete={onDelete} onSave={onSave}/>
     ));
   };
 

@@ -5,13 +5,16 @@ import ReplyButton from "./ReplyButton";
 import ReplyForm from "./ReplyForm";
 import Edit from "./Edit";
 import Delete from "./Delete";
+import Button from "./Button";
 
-const Comment = ( {comment, onDelete} ) => {
+const Comment = ( {comment, onDelete, onSave} ) => {
 
   const [score, setScore] = useState(comment.score);
   const [liked, setLiked] = useState(false);
   const [replies, setReplies] = useState(comment.replies || []);
   const [showReplyForm, setShowReplyForm] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedComment, setEditedComment] = useState(comment.content);
 
   const handleLike = () => {
     if (!liked) {
@@ -47,6 +50,19 @@ const Comment = ( {comment, onDelete} ) => {
     setShowReplyForm(!showReplyForm);
   };
 
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleInputChange = (event) => {
+    setEditedComment(event.target.value);
+  };
+
+  const handleSave = () => {
+    onSave(comment.id, editedComment);
+    setIsEditing(false);
+  };
+
   const renderReplies = (replies) => {
     return (
       <ul className="comment-replies">
@@ -71,14 +87,29 @@ const Comment = ( {comment, onDelete} ) => {
           <span className="you-text">you</span>
           <span className="date-posted">{comment.createdAt}</span>
         </div>
+        {isEditing ? (
+          <div>
+            <input 
+              type="text"
+              value={editedComment}
+              onChange={handleInputChange} 
+            />
+            <Button 
+              text={"UPDATE"} 
+              handleOnClick={handleSave} 
+              color={"hsl(238, 40%, 52%)"} 
+          />
+          </div>
+        ) : (
         <div className="comment-text">
           {comment.content}
         </div>
+        )}
         <div className="vote-and-reply-container">
           <Likes voteNumber={score} onUpvote={handleLike} onDownvote={handleUnlike}/>
           <div className="edit-delete-container">
           <Delete onClick={() => onDelete(comment)} />
-          <Edit />
+          <Edit onClick={handleEditClick}/>
           </div>
         </div>
       </div>

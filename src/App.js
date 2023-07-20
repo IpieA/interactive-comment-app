@@ -8,6 +8,7 @@ function App() {
   const [comments, setComments] = useState(data.comments);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [commentToDelete, setCommentToDelete] = useState(null);
+  const [editingComment, setEditingComment] = useState(null);
 
   const handleAddComment = (newComment) => {
     //Add new comment to existing comments
@@ -34,9 +35,17 @@ function App() {
     setShowDeleteModal(false);
   };
 
+  const handleSaveEdit = (commentId, editedComment) => {
+    setComments((prevComments) => 
+      prevComments.map((comment) => 
+        comment.id === commentId ? { ...comment, content: editedComment} : comment
+      )
+    )
+  };
+
   return (
     <div className="app">
-      <Comments comments={comments} onDelete={handleDelete} />
+      <Comments comments={comments} onDelete={handleDelete} onSave={handleSaveEdit}/>
       <AddComment onAddComment={handleAddComment} />
       {showDeleteModal && (
         <div className="delete-modal">
