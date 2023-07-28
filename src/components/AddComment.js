@@ -37,14 +37,13 @@ const AddComment = ( { onAddComment } ) => {
 
   return (
     <div className="add-comment-container">
-        <input 
+        <textarea 
           type="text"
-          id=""
-          name=""
+          className="add-comment-textarea"
           placeholder="Add a comment..."
           value={comment}
           onChange={handleInputChange}
-        />
+        ></textarea>
       <div className='send-comment-container'>
         <img className='user-image' src={data.currentUser.image.png} alt="" />
         <Button 

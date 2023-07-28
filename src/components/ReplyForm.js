@@ -20,14 +20,13 @@ const ReplyForm = ( {submitReply} ) => {
   return (
     <div className="reply-form">
         <img className='user-image' src={data.currentUser.image.png} alt="user image" />
-        <input 
+        <textarea 
           type="text"
-          id=""
-          name=""
+          className="reply-textarea"
           placeholder="Reply..."
           value={replyContent}
           onChange={handleInputChange}
-        />
+        ></textarea>
         <Button 
             text={"SEND"} 
             handleOnClick={handleReplySubmit} 

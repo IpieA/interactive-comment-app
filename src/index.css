@@ -123,12 +123,13 @@ body {
   border-radius: 5px;
 }
 
-.add-comment-container input[type="text"] {
+.add-comment-textarea {
   width: 100%;
   padding: 0.5rem;
   border: 1px solid #d9d9d9;
   border-radius: 5px;
   background: none;
+  min-height: 100px;
 }
 
 .send-comment-container{
@@ -141,11 +142,12 @@ body {
 .reply-form{
   display: flex;
 }
-.reply-form input[type="text"] {
+.reply-textarea {
   padding: 0.5rem;
   border: 1px solid #d9d9d9;
   border-radius: 5px;
   background: none;
+  min-height: 100px;
 } 
 
 .edit-delete-container{
@@ -192,7 +194,6 @@ body {
   border-radius: 5px;
   padding: 1.5rem;
   max-width: 320px;
-  /* text-align: center; */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .delete-modal h2 {
@@ -212,3 +213,16 @@ body {
   padding: 1rem;
 }
 
+.edit-input-container{
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0;
+}
+
+.edit-textarea{
+  padding: 0.5rem;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  background: none;
+  min-height: 100px;
+}

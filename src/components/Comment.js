@@ -44,6 +44,7 @@ const Comment = ( {comment, onDelete, onSave} ) => {
     }
 
     setReplies([...replies, newReply]);
+    setShowReplyForm(false);
   };
 
   const handleReplyButtonClick = () => {
@@ -88,12 +89,13 @@ const Comment = ( {comment, onDelete, onSave} ) => {
           <span className="date-posted">{comment.createdAt}</span>
         </div>
         {isEditing ? (
-          <div>
-            <input 
+          <div className="edit-input-container">
+            <textarea
+              className="edit-textarea"
               type="text"
               value={editedComment}
               onChange={handleInputChange} 
-            />
+            ></textarea>
             <Button 
               text={"UPDATE"} 
               handleOnClick={handleSave} 
