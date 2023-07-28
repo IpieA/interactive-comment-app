@@ -13,6 +13,7 @@ body {
 }
 
 .app{
+  position: relative;
   max-width: 375px;
   padding: min(8vmin, .5rem) min(8vmin, 1rem);
   background: hsl(223, 19%, 93%);
@@ -102,6 +103,7 @@ body {
   border-radius: 5px;
   cursor: pointer;
   text-decoration: none;
+  text-transform: uppercase;
   font-size: 15px;
   font-family: inherit;
 }
@@ -169,3 +171,44 @@ body {
   background: hsl(238, 40%, 52%);
   border-radius: 5px;
 }
+
+/* Styles for the overlay */
+.delete-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Make sure the overlay appears above other elements */
+}
+
+/* Styles for the modal popup */
+.delete-modal {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 1.5rem;
+  max-width: 320px;
+  /* text-align: center; */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.delete-modal h2 {
+  margin: 0 5px;
+  color: hsl(211, 10%, 45%);
+}
+.delete-modal p {
+  margin: 20px 5px;
+  color: hsl(211, 10%, 45%);
+  line-height: 1.5;
+}
+.modal-buttons-container{
+  display: flex;
+  justify-content: center;
+}
+.delete-modal button {
+  padding: 1rem;
+}
+

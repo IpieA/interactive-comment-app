@@ -2,6 +2,7 @@ import { useState } from "react";
 import data from "./data.json";
 import Comments from "./components/Comments";
 import AddComment from "./components/AddComment";
+import Button from "./components/Button";
 
 function App() {
 
@@ -48,10 +49,25 @@ function App() {
       <Comments comments={comments} onDelete={handleDelete} onSave={handleSaveEdit}/>
       <AddComment onAddComment={handleAddComment} />
       {showDeleteModal && (
-        <div className="delete-modal">
-          <p>Are you sure you want to delete this comment?</p>
-          <button onClick={handleCancelDelete}>Cancel</button>
-          <button onClick={handleDeleteComment}>Delete</button>
+        <div className="delete-overlay">
+          <div className="delete-modal">
+            <h2>Delete Comment</h2>
+            <p>Are you sure you want to delete this comment? 
+              This will remove the comment and can't be undone
+            </p>
+            <div className="modal-buttons-container">
+              <Button 
+                text={"No, Cancel"} 
+                handleOnClick={handleCancelDelete} 
+                color={"hsl(211, 10%, 45%)"} 
+              />
+              <Button 
+                text={"Yes, Delete"} 
+                handleOnClick={handleDeleteComment} 
+                color={"hsl(358, 79%, 66%)"} 
+              />
+            </div>
+          </div>
         </div>
       )}
     </div>
